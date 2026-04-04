@@ -152,7 +152,7 @@ export default function Home() {
               Vol. I &mdash; Est. 2026
             </span>
             <span className="font-times text-[10px] text-white/40 tracking-[0.25em] uppercase italic">
-              24 &ndash; 26 April &nbsp;&middot;&nbsp; Entry 100
+              24 &ndash; 26 April &nbsp;&middot;&nbsp; Entry ₹100
             </span>
           </div>
 
@@ -172,7 +172,7 @@ export default function Home() {
               &ldquo;Every dream has a price.&rdquo;
             </span>
             <span className="font-times text-[10px] text-white/35 uppercase tracking-[0.22em]">
-              Prize Pool &mdash; 70,000
+              Prize Pool &mdash; ₹70,000
             </span>
           </div>
           <div className="rule-single" />
@@ -228,8 +228,8 @@ export default function Home() {
                   {[
                     ["Dates",     "24 – 26 April 2026"],
                     ["Time",      "8:30 AM onwards"],
-                    ["Entry Fee", "100"],
-                    ["Prize",     "70,000 Pool"],
+                    ["Entry Fee", "₹ 100"],
+                    ["Prize",     "₹ 70,000 Pool"],
                     ["Format",    "Live Trading Sim"],
                     ["Platform",  "mcse.in"],
                   ].map(([k, v]) => (
@@ -249,7 +249,7 @@ export default function Home() {
             <p className="font-times italic text-[10px] tracking-[0.4em] text-white/30 uppercase mb-2">
               Total Prize Pool
             </p>
-            <p className="prize-display">70000</p>
+            <p className="prize-display">₹70000</p>
           </div>
         </main>
 
