@@ -1,326 +1,301 @@
 @import "tailwindcss";
 
-/* ── Monument Extended ─────────────────────────────── */
+/* --- Fonts --------------------------------------------------- */
 @font-face {
-  font-family: 'Monument Extended';
-  src: url('/fonts/MonumentExtended-Regular.otf') format('opentype');
+  font-family: "MonumentExtended";
+  src: url("/fonts/MonumentExtended-Regular.otf") format("opentype");
   font-weight: 400;
-  font-style: normal;
   font-display: swap;
 }
-
 @font-face {
-  font-family: 'Monument Extended';
-  src: url('/fonts/MonumentExtended-Ultrabold.otf') format('opentype');
+  font-family: "MonumentExtended";
+  src: url("/fonts/MonumentExtended-Ultrabold.otf") format("opentype");
   font-weight: 800;
-  font-style: normal;
   font-display: swap;
 }
 
-:root {
-  --background: #0c0b09;
-  --foreground: #f2ede6;
-  --font-mono: var(--font-geist-mono);
-}
+/* --- Utilities ------------------------------------------------ */
+.font-monument { font-family: "MonumentExtended", serif; }
+.font-times    { font-family: "Times New Roman", Times, serif; }
+.font-mono     { font-family: var(--font-geist-mono), monospace; }
+.font-bebas    { font-family: "Bebas Neue", sans-serif; }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-mono: var(--font-geist-mono);
-}
-
-html, body {
-  background: #0c0b09;
-  color: #f2ede6;
-}
-
-/* ── Font helpers ───────────────────────────────────── */
-.font-times {
-  font-family: 'Times New Roman', Times, Georgia, serif;
-}
-
-/* ── Newspaper rules ────────────────────────────────── */
-.rule-single {
-  width: 100%;
-  height: 1px;
-  background: rgba(255,255,255,0.14);
-}
-
-.rule-double {
-  width: 100%;
-  border-top: 3px solid rgba(255,255,255,0.65);
-  border-bottom: 1px solid rgba(255,255,255,0.25);
-  padding-bottom: 4px;
-}
-
-/* ── Masthead ───────────────────────────────────────── */
-.masthead-title {
-  font-family: 'Monument Extended', 'Bebas Neue', Impact, sans-serif;
-  font-weight: 400;
-  font-size: clamp(4rem, 18vw, 11rem);
-  line-height: 1;
-  letter-spacing: 0.1em;
-  color: #ffffff;
-  text-transform: uppercase;
-}
-
-/* ── Countdown ──────────────────────────────────────── */
-.masthead-countdown {
-  font-family: 'Times New Roman', Times, Georgia, serif;
-  font-size: clamp(2.2rem, 6vw, 4rem);
-  font-weight: 400;
-  line-height: 1;
-  color: rgba(255,255,255,0.88);
-}
-
-/* ── Prize display ──────────────────────────────────── */
-.prize-display {
-  font-family: 'Monument Extended', 'Bebas Neue', Impact, sans-serif;
-  font-weight: 400;
-  font-size: clamp(4rem, 14vw, 9rem);
-  line-height: 1;
-  letter-spacing: 0.08em;
-  color: rgba(255,255,255,0.82);
-}
-
-/* ── Background photo ───────────────────────────────── */
-.newspaper-page {
-  position: relative;
-}
+/* --- Background Photo ----------------------------------------- */
+.newspaper-page { position: relative; background: #0d0c0b; }
 
 .bg-photo {
   position: fixed;
   inset: 0;
   z-index: 0;
-  background-image: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80');
-  background-size: cover;
-  background-position: center 20%;
-  filter: grayscale(100%) contrast(1.15) brightness(0.22);
+  background: url("https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80")
+    center / cover no-repeat fixed;
+  filter: grayscale(100%) brightness(0.22) contrast(1.1);
+  pointer-events: none;
 }
 
-/* ── Film grain ─────────────────────────────────────── */
+/* --- Film Grain ----------------------------------------------- */
 .grain-overlay {
   position: fixed;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.38;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 200px 200px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.06;
   mix-blend-mode: overlay;
 }
 
-/* ── Ticker ─────────────────────────────────────────── */
-@keyframes ticker-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+/* --- Rules ---------------------------------------------------- */
+.rule-double {
+  position: relative;
+  height: 5px;
+  border-top: 1.5px solid rgba(255,255,255,0.45);
+  border-bottom: 1.5px solid rgba(255,255,255,0.45);
+}
+.rule-single {
+  border-top: 1px solid rgba(255,255,255,0.16);
 }
 
+/* --- Masthead ------------------------------------------------- */
+.masthead-title {
+  font-family: "MonumentExtended", serif;
+  font-weight: 800;
+  font-size: clamp(3rem, 14vw, 10rem);
+  letter-spacing: -0.025em;
+  line-height: 1;
+  color: white;
+}
+
+.masthead-countdown {
+  font-family: "MonumentExtended", serif;
+  font-weight: 400;
+  font-size: clamp(1.8rem, 6vw, 4.2rem);
+  line-height: 1;
+  color: white;
+  letter-spacing: -0.02em;
+}
+
+/* --- Typography ----------------------------------------------- */
+.section-label {
+  font-family: "Times New Roman", serif;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.50);
+}
+
+.body-text {
+  font-family: "Times New Roman", serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.85;
+}
+
+.body-text-dim {
+  font-family: "Times New Roman", serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.52);
+  line-height: 1.85;
+}
+
+/* --- Prize Display -------------------------------------------- */
+.prize-display {
+  font-family: "MonumentExtended", serif;
+  font-weight: 800;
+  font-size: clamp(4rem, 15vw, 10rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: white;
+}
+
+/* --- Register Button ------------------------------------------ */
+.register-btn {
+  display: inline-block;
+  font-family: "Times New Roman", serif;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.88);
+  border: 1px solid rgba(255,255,255,0.28);
+  padding: 13px 36px;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.register-btn:hover {
+  border-color: rgba(255,255,255,0.7);
+  color: white;
+  background: rgba(255,255,255,0.06);
+}
+
+/* --- Ticker --------------------------------------------------- */
+@keyframes ticker-slide {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
 .ticker-scroll {
-  animation: ticker-scroll 32s linear infinite;
-  white-space: nowrap;
-  will-change: transform;
+  animation: ticker-slide 36s linear infinite;
+  width: max-content;
 }
 
-/* ── Loading screen ─────────────────────────────────── */
-@keyframes rule-expand {
-  from { transform: scaleX(0); opacity: 0; }
-  to   { transform: scaleX(1); opacity: 1; }
-}
+/* --------------------------------------------------------------- */
+/* --- Loading Screen ------------------------------------------- */
+/* --------------------------------------------------------------- */
 
-@keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes bar-grow {
-  from { transform: scaleY(0); opacity: 0; }
-  to   { transform: scaleY(1); opacity: 1; }
-}
-
-@keyframes screen-exit {
+@keyframes ld-fade-exit {
   from { opacity: 1; }
   to   { opacity: 0; }
 }
+@keyframes ld-rule-expand {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes ld-dot-pulse {
+  0%, 80%, 100% { opacity: 0.15; transform: scale(0.8); }
+  40%           { opacity: 1;    transform: scale(1);   }
+}
 
-.loading-screen {
+.ld-screen {
   position: fixed;
   inset: 0;
-  z-index: 100;
+  z-index: 9999;
   background: #0a0908;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-.loading-exit {
-  animation: screen-exit 0.65s ease-in forwards;
+.ld-exit {
+  animation: ld-fade-exit 0.6s ease forwards;
 }
 
-.loading-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  width: min(520px, 88vw);
-}
-
-.loading-rule {
-  width: 100%;
-  height: 1px;
-  background: rgba(255,255,255,0.3);
-  transform-origin: center;
-  animation: rule-expand 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
-}
-
-.loading-title {
-  font-family: 'Monument Extended', 'Bebas Neue', Impact, sans-serif;
-  font-weight: 400;
-  font-size: clamp(3.5rem, 14vw, 7rem);
-  letter-spacing: 0.12em;
-  color: #ffffff;
-  line-height: 1;
-  text-align: center;
-}
-
-.loading-sub {
-  font-family: 'Times New Roman', Times, Georgia, serif;
-  font-style: italic;
-  font-size: 11px;
-  letter-spacing: 0.3em;
-  color: rgba(255,255,255,0.35);
-  text-transform: uppercase;
-  text-align: center;
-}
-
-.loading-candles {
-  display: flex;
-  align-items: flex-end;
-  gap: 4px;
-  height: 44px;
-  margin-top: 8px;
-}
-
-.loading-bar {
-  width: 6px;
-  border-radius: 1px;
-  transform-origin: bottom;
-  animation: bar-grow 0.4s ease-out both;
-}
-
-.loading-fade-in {
-  animation: fade-in-up 0.5s ease-out both;
-}
-
-
-:root {
-  --background: #0c0b09;
-  --foreground: #f2ede6;
-  --font-mono: var(--font-geist-mono);
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-mono: var(--font-geist-mono);
-}
-
-html, body {
-  background: var(--background);
-  color: var(--foreground);
-}
-
-/* ── Utility font helpers ───────────────────────────── */
-.font-times {
-  font-family: 'Times New Roman', Times, Georgia, serif;
-}
-
-.font-monument {
-  font-family: 'Monument Extended', var(--font-bebas), 'Bebas Neue', Impact, sans-serif;
-  letter-spacing: 0.05em;
-}
-
-/* ── Newspaper rules ────────────────────────────────── */
-.rule-single {
-  width: 100%;
-  height: 1px;
-  background: rgba(255,255,255,0.18);
-}
-
-.rule-double {
-  width: 100%;
-  border-top: 3px solid rgba(255,255,255,0.7);
-  border-bottom: 1px solid rgba(255,255,255,0.3);
-  padding-bottom: 3px;
-}
-
-/* ── Masthead title ─────────────────────────────────── */
-.masthead-title {
-  font-family: 'Monument Extended', var(--font-bebas), 'Bebas Neue', Impact, sans-serif;
-  font-weight: 400;
-  font-size: clamp(3.5rem, 16vw, 10rem);
-  line-height: 1;
-  letter-spacing: 0.12em;
-  color: #ffffff;
-  text-transform: uppercase;
-}
-
-/* ── Countdown figures ──────────────────────────────── */
-.masthead-countdown {
-  font-family: 'Times New Roman', Times, Georgia, serif;
-  font-size: clamp(2rem, 6vw, 4rem);
-  font-weight: 400;
-  line-height: 1;
-  color: rgba(255,255,255,0.9);
-}
-
-/* ── Prize display ──────────────────────────────────── */
-.prize-display {
-  font-family: 'Monument Extended', var(--font-bebas), 'Bebas Neue', Impact, sans-serif;
-  font-weight: 400;
-  font-size: clamp(3rem, 10vw, 7rem);
-  line-height: 1;
-  letter-spacing: 0.08em;
-  color: rgba(255,255,255,0.85);
-}
-
-/* ── Background photo ───────────────────────────────── */
-.newspaper-page {
-  position: relative;
-}
-
-.bg-photo {
-  position: fixed;
+/* Grain on loading screen */
+.ld-grain {
+  position: absolute;
   inset: 0;
-  z-index: 0;
-  background-image: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80');
-  background-size: cover;
-  background-position: center top;
-  filter: grayscale(100%) contrast(1.1) brightness(0.28);
-}
-
-/* ── Film grain ─────────────────────────────────────── */
-.grain-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
   pointer-events: none;
-  opacity: 0.45;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 200px 200px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.055;
   mix-blend-mode: overlay;
 }
 
-/* ── Scrolling ticker ───────────────────────────────── */
-@keyframes ticker-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+.ld-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  width: min(680px, 90vw);
 }
 
-.ticker-scroll {
-  animation: ticker-scroll 30s linear infinite;
-  white-space: nowrap;
-  will-change: transform;
+/* Animated horizontal rules */
+.ld-top-rule,
+.ld-bottom-rule {
+  width: 100%;
+  height: 4px;
+  border-top: 1.5px solid rgba(255,255,255,0.40);
+  border-bottom: 1.5px solid rgba(255,255,255,0.40);
+  transform-origin: center;
+  animation: ld-rule-expand 0.6s cubic-bezier(0.22,1,0.36,1) both;
+}
+.ld-bottom-rule {
+  animation-delay: 0.1s;
+}
+
+/* Corner labels */
+.ld-corners {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.ld-corner-text {
+  font-family: "Times New Roman", serif;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+/* Title block */
+.ld-title-wrap {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.ld-title-wrap.ld-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ld-title {
+  font-family: "MonumentExtended", serif;
+  font-weight: 800;
+  font-size: clamp(3.5rem, 18vw, 8rem);
+  letter-spacing: -0.025em;
+  line-height: 1;
+  color: white;
+}
+
+.ld-subtitle {
+  font-family: "Times New Roman", serif;
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 0.28em;
+  color: rgba(255,255,255,0.45);
+  margin-top: 10px;
+}
+
+/* "Opening Markets" + dots */
+.ld-status-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.ld-status-row.ld-show {
+  opacity: 1;
+}
+.ld-status-label {
+  font-family: "Times New Roman", serif;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.50);
+}
+.ld-dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.ld-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.70);
+  animation: ld-dot-pulse 1.2s ease-in-out infinite;
+}
+
+/* Prize strip at bottom of loading screen */
+.ld-prize-strip {
+  display: flex;
+  gap: 24px;
+  align-items: baseline;
+  opacity: 0;
+  transition: opacity 0.4s ease 0.1s;
+}
+.ld-prize-strip.ld-show {
+  opacity: 1;
+}
+.ld-prize-label {
+  font-family: "Times New Roman", serif;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+}
+.ld-prize-val {
+  font-family: "MonumentExtended", serif;
+  font-weight: 800;
+  font-size: clamp(1.6rem, 6vw, 3.2rem);
+  color: white;
+  letter-spacing: -0.02em;
 }
