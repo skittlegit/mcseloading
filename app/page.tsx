@@ -127,7 +127,7 @@ export default function Home() {
             Markets Open Soon
           </span>
           <span className="font-times text-[10px] text-white/40 uppercase tracking-widest">
-            Prize Pool — ₹7,000
+            Prize Pool — ₹70,000
           </span>
         </div>
 
@@ -137,14 +137,14 @@ export default function Home() {
       {/* ── BODY ───────────────────────────────────── */}
       <main className="relative z-10 flex-1 flex flex-col px-6 md:px-12 py-8 gap-8">
 
-        {/* Deck quote */}
-        <div className="text-center max-w-2xl mx-auto">
-          <p className="font-times italic text-white/75 text-xl md:text-2xl leading-relaxed tracking-wide">
+        {/* Deck quote — secondary, not centrepiece */}
+        <div className="flex items-center gap-4">
+          <div className="rule-single flex-1" />
+          <p className="font-times italic text-white/40 text-xs tracking-widest whitespace-nowrap">
             &ldquo;Every dream has a price.&rdquo;
           </p>
+          <div className="rule-single flex-1" />
         </div>
-
-        <div className="rule-single" />
 
         {/* Three-column editorial layout */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:divide-x md:divide-white/15">
@@ -198,7 +198,7 @@ export default function Home() {
                 {[
                   ["Dates",     "24 – 26 April 2026"],
                   ["Entry Fee", "₹ 100"],
-                  ["Prize",     "₹ 7,000 Pool"],
+                  ["Prize",     "₹ 70,000 Pool"],
                   ["Format",    "Live Trading Sim"],
                   ["Platform",  "mcse.in"],
                 ].map(([k, v]) => (
@@ -219,7 +219,7 @@ export default function Home() {
           <p className="font-times italic text-[10px] tracking-[0.35em] text-white/35 uppercase mb-1">
             Total Prize Pool
           </p>
-          <p className="prize-display">₹7000</p>
+          <p className="prize-display">₹70000</p>
         </div>
       </main>
 

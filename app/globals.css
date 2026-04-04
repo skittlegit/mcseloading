@@ -1,19 +1,25 @@
 @import "tailwindcss";
 
 /* ── Fonts ─────────────────────────────────────────── */
-/* Monument Extended — loaded locally by user or falls back to Bebas Neue */
+/* Drop MonumentExtended-Regular.otf / .woff2 into /public/fonts/ */
 @font-face {
   font-family: 'Monument Extended';
-  src: local('Monument Extended Regular'), local('MonumentExtended-Regular');
+  src: url('/fonts/MonumentExtended-Regular.woff2') format('woff2'),
+       url('/fonts/MonumentExtended-Regular.otf') format('opentype'),
+       local('Monument Extended Regular'), local('MonumentExtended-Regular');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Monument Extended';
-  src: local('Monument Extended Ultrabold'), local('MonumentExtended-Ultrabold');
+  src: url('/fonts/MonumentExtended-Ultrabold.woff2') format('woff2'),
+       url('/fonts/MonumentExtended-Ultrabold.otf') format('opentype'),
+       local('Monument Extended Ultrabold'), local('MonumentExtended-Ultrabold');
   font-weight: 800;
   font-style: normal;
+  font-display: swap;
 }
 
 :root {
