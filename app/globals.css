@@ -1,26 +1,128 @@
 @import "tailwindcss";
 
+/* ── Fonts ─────────────────────────────────────────── */
+/* Monument Extended — loaded locally by user or falls back to Bebas Neue */
+@font-face {
+  font-family: 'Monument Extended';
+  src: local('Monument Extended Regular'), local('MonumentExtended-Regular');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Monument Extended';
+  src: local('Monument Extended Ultrabold'), local('MonumentExtended-Ultrabold');
+  font-weight: 800;
+  font-style: normal;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0c0b09;
+  --foreground: #f2ede6;
+  --font-mono: var(--font-geist-mono);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
+html, body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ── Utility font helpers ───────────────────────────── */
+.font-times {
+  font-family: 'Times New Roman', Times, Georgia, serif;
+}
+
+.font-monument {
+  font-family: 'Monument Extended', var(--font-bebas), 'Bebas Neue', Impact, sans-serif;
+  letter-spacing: 0.05em;
+}
+
+/* ── Newspaper rules ────────────────────────────────── */
+.rule-single {
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,0.18);
+}
+
+.rule-double {
+  width: 100%;
+  border-top: 3px solid rgba(255,255,255,0.7);
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  padding-bottom: 3px;
+}
+
+/* ── Masthead title ─────────────────────────────────── */
+.masthead-title {
+  font-family: 'Monument Extended', var(--font-bebas), 'Bebas Neue', Impact, sans-serif;
+  font-weight: 400;
+  font-size: clamp(3.5rem, 16vw, 10rem);
+  line-height: 1;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+/* ── Countdown figures ──────────────────────────────── */
+.masthead-countdown {
+  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 400;
+  line-height: 1;
+  color: rgba(255,255,255,0.9);
+}
+
+/* ── Prize display ──────────────────────────────────── */
+.prize-display {
+  font-family: 'Monument Extended', var(--font-bebas), 'Bebas Neue', Impact, sans-serif;
+  font-weight: 400;
+  font-size: clamp(3rem, 10vw, 7rem);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.85);
+}
+
+/* ── Background photo ───────────────────────────────── */
+.newspaper-page {
+  position: relative;
+}
+
+.bg-photo {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80');
+  background-size: cover;
+  background-position: center top;
+  filter: grayscale(100%) contrast(1.1) brightness(0.28);
+}
+
+/* ── Film grain ─────────────────────────────────────── */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.45;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  mix-blend-mode: overlay;
+}
+
+/* ── Scrolling ticker ───────────────────────────────── */
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-scroll {
+  animation: ticker-scroll 30s linear infinite;
+  white-space: nowrap;
+  will-change: transform;
 }
