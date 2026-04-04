@@ -310,12 +310,17 @@ export default function Home() {
           </div>
 
           <div className="rule-single mb-0" />
+          {/* Mobile: socials on own row; Desktop: inline between the two text items */}
           <div className="flex items-center justify-between py-1.5 md:py-1">
             <span className="font-times text-[10px] text-white/60 uppercase tracking-[0.18em]">Markets Open Soon</span>
-            <Socials />
+            <span className="hidden md:block"><Socials /></span>
             <span className="font-times text-[10px] text-white/60 uppercase tracking-[0.18em]">
               24&#8202;&ndash;&#8202;26 Apr &middot; &#8377;100 Entry
             </span>
+          </div>
+          {/* Socials row — mobile only, sits between rule lines */}
+          <div className="flex justify-center py-2 md:hidden border-t border-white/10">
+            <Socials />
           </div>
           <div className="rule-single" />
         </header>
