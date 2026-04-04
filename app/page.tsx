@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { useEffect, useState, useCallback } from "react";
+import Image from "next/image";
 
 const TICKER_ITEMS = [
   { sym: "NIFTY50",   val: "22,847.65", chg: "+1.24%" },
@@ -120,7 +121,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const target = new Date("2026-04-24T08:30:00+05:30");
+    const target = new Date("2026-04-24T20:30:00+05:30");
     const tick = () => {
       const diff = target.getTime() - Date.now();
       if (diff <= 0) return;
@@ -147,19 +148,30 @@ export default function Home() {
         <header className="relative z-10 px-8 md:px-16 pt-10 pb-0">
           <div className="rule-double mb-5" />
 
-          <div className="flex items-baseline justify-between mb-4">
-            <span className="font-times text-[10px] text-white/40 tracking-[0.25em] uppercase italic">
-              Vol. I &mdash; Est. 2026
-            </span>
-            <span className="font-times text-[10px] text-white/40 tracking-[0.25em] uppercase italic">
-              24 &ndash; 26 April &nbsp;&middot;&nbsp; Entry ₹100
-            </span>
+          {/* Logo bar */}
+          <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 flex items-center justify-center">
+                <Image src="/logo.png" alt="MathSoc logo" width={32} height={32} className="object-contain opacity-85" />
+              </div>
+              <span className="font-times text-[10px] text-white/45 tracking-[0.2em] uppercase italic">
+                MathSoc
+              </span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="font-times text-[10px] text-white/45 tracking-[0.2em] uppercase italic">
+                Aeon
+              </span>
+              <div className="w-12 h-12 flex items-center justify-center">
+                <Image src="/white.png" alt="Aeon logo" width={48} height={48} className="object-contain opacity-85" />
+              </div>
+            </div>
           </div>
 
           <div className="text-center pt-2 pb-5">
             <h1 className="masthead-title">MCSE.IN</h1>
             <p className="font-times italic text-white/45 text-[13px] tracking-[0.3em] mt-2">
-              Mock Capital Stock Exchange
+              Math Club Stock Exchange
             </p>
           </div>
 
@@ -168,11 +180,11 @@ export default function Home() {
             <span className="font-times text-[10px] text-white/35 uppercase tracking-[0.22em]">
               Markets Open Soon
             </span>
-            <span className="font-times italic text-[10px] text-white/35 tracking-[0.22em]">
+            <span className="font-times italic text-[11px] text-white/65 tracking-[0.15em]">
               &ldquo;Every dream has a price.&rdquo;
             </span>
             <span className="font-times text-[10px] text-white/35 uppercase tracking-[0.22em]">
-              Prize Pool &mdash; ₹70,000
+              24 &ndash; 26 Apr &nbsp;&middot;&nbsp; ₹100 Entry
             </span>
           </div>
           <div className="rule-single" />
@@ -187,7 +199,7 @@ export default function Home() {
                 About the Exchange
               </p>
               <p className="font-times text-[13px] text-white/65 leading-[1.75]">
-                The Mock Capital Stock Exchange is a live trading simulation
+                The Math Club Stock Exchange is a live trading simulation
                 event where participants compete across three days of open
                 markets — buying, selling, and strategising for maximum returns.
               </p>
@@ -227,7 +239,7 @@ export default function Home() {
                 <tbody>
                   {[
                     ["Dates",     "24 – 26 April 2026"],
-                    ["Time",      "8:30 AM onwards"],
+                    ["Time",      "8:30 PM onwards"],
                     ["Entry Fee", "₹ 100"],
                     ["Prize",     "₹ 70,000 Pool"],
                     ["Format",    "Live Trading Sim"],
