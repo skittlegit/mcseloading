@@ -67,6 +67,56 @@ function generateChartPath(w: number, h: number, points: number): string {
   return d;
 }
 
+function Socials() {
+  const links = [
+    {
+      href: "https://www.instagram.com/mathsoc.mu/",
+      label: "Instagram",
+      icon: (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+          <circle cx="12" cy="12" r="4" />
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+        </svg>
+      ),
+    },
+    {
+      href: "https://x.com/mumathsoc",
+      label: "X / Twitter",
+      icon: (
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+      ),
+    },
+    {
+      href: "https://www.linkedin.com/company/mathematics-club-mu/",
+      label: "LinkedIn",
+      icon: (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+        </svg>
+      ),
+    },
+  ];
+  return (
+    <div className="flex items-center gap-4">
+      {links.map(({ href, label, icon }) => (
+        <a
+          key={href}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={label}
+          className="text-white/40 hover:text-white/75 transition-colors"
+        >
+          {icon}
+        </a>
+      ))}
+    </div>
+  );
+}
+
 function LoadingScreen({ onDone }: { onDone: () => void }) {
   const [progress, setProgress] = useState(0);
   const [phase, setPhase] = useState(0); // 0=boot 1=chart 2=text 3=exit
@@ -262,9 +312,7 @@ export default function Home() {
           <div className="rule-single mb-0" />
           <div className="flex items-center justify-between py-1.5 md:py-1">
             <span className="font-times text-[10px] text-white/60 uppercase tracking-[0.18em]">Markets Open Soon</span>
-            <span className="font-times italic text-[11px] text-white/70 tracking-[0.14em] hidden sm:block">
-              &ldquo;Every dream has a price.&rdquo;
-            </span>
+            <Socials />
             <span className="font-times text-[10px] text-white/60 uppercase tracking-[0.18em]">
               24&#8202;&ndash;&#8202;26 Apr &middot; &#8377;100 Entry
             </span>
@@ -272,65 +320,44 @@ export default function Home() {
           <div className="rule-single" />
         </header>
 
-        <main className="relative z-10 flex-1 flex flex-col px-6 sm:px-10 md:px-14 py-5 md:py-3 gap-5 md:gap-3 justify-between">
+        <main className="relative z-10 flex-1 flex flex-col md:grid md:grid-cols-3 md:grid-rows-[1fr_auto] px-6 sm:px-10 md:px-14 pt-5 md:pt-3 pb-5 md:pb-0 gap-5 md:gap-0">
 
-          <div className="grid grid-cols-1 md:grid-cols-3 md:divide-x md:divide-white/12 gap-6 md:gap-0">
+          {/* About — col 1, row 1 on desktop */}
+          <div className="md:pr-8 md:col-start-1 md:row-start-1 md:self-start">
+            <p className="section-label mb-2 md:mb-1.5">About the Exchange</p>
+            <p className="body-text">
+              The Math Club Stock Exchange is a live trading simulation where
+              participants compete across three days of open markets &mdash; buying,
+              selling, and strategising for maximum returns.
+            </p>
+            <p className="body-text-dim mt-2 md:mt-1.5">
+              Built for those who believe the market rewards the bold,
+              the disciplined, and the relentless.
+            </p>
+          </div>
 
-            <div className="md:pr-8">
-              <p className="section-label mb-2 md:mb-1.5">About the Exchange</p>
-              <p className="body-text">
-                The Math Club Stock Exchange is a live trading simulation where
-                participants compete across three days of open markets &mdash; buying,
-                selling, and strategising for maximum returns.
-              </p>
-              <p className="body-text-dim mt-2 md:mt-1.5">
-                Built for those who believe the market rewards the bold,
-                the disciplined, and the relentless.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center justify-center gap-3 md:gap-2.5 md:px-8 border-y md:border-y-0 border-white/12 py-6 md:py-0">
-              <p className="section-label">Opening Bell In</p>
-              <div className="flex gap-6 md:gap-8">
-                {[
-                  { label: "Days", val: days },
-                  { label: "Hrs",  val: hours },
-                  { label: "Min",  val: mins },
-                  { label: "Sec",  val: secs },
-                ].map(({ label, val }) => (
-                  <div key={label} className="text-center">
-                    <div className="masthead-countdown tabular-nums">{pad(val)}</div>
-                    <div className="font-times text-[10px] tracking-[0.24em] text-white/55 uppercase mt-1">
-                      {label}
-                    </div>
+          {/* Countdown — col 2, row 1 on desktop */}
+          <div className="flex flex-col items-center justify-center gap-3 md:gap-2.5 md:px-8 border-y md:border-y-0 md:border-l md:border-white/12 py-6 md:py-0 md:col-start-2 md:row-start-1">
+            <p className="section-label">Opening Bell In</p>
+            <div className="flex gap-6 md:gap-8">
+              {[
+                { label: "Days", val: days },
+                { label: "Hrs",  val: hours },
+                { label: "Min",  val: mins },
+                { label: "Sec",  val: secs },
+              ].map(({ label, val }) => (
+                <div key={label} className="text-center">
+                  <div className="masthead-countdown tabular-nums">{pad(val)}</div>
+                  <div className="font-times text-[10px] tracking-[0.24em] text-white/55 uppercase mt-1">
+                    {label}
                   </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="md:pl-10">
-              <p className="section-label mb-2 md:mb-1.5">Event Details</p>
-              <table className="w-full">
-                <tbody>
-                  {[
-                    ["Dates",      "24 \u2013 26 April 2026"],
-                    ["Time",       "8:30 PM onwards"],
-                    ["Venue",      "Mahindra University"],
-                    ["Entry Fee",  "\u20b9 100 per team"],
-                    ["Prize Pool", "\u20b9 70,000 total"],
-                    ["Format",     "Live Trading Sim"],
-                  ].map(([k, v]) => (
-                    <tr key={k} className="border-b border-white/10">
-                      <td className="py-1.5 md:py-1 pr-4 font-times italic text-white/55 text-[12px] whitespace-nowrap">{k}</td>
-                      <td className="py-1.5 md:py-1 font-times text-white/88 text-[13px]">{v}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                </div>
+              ))}
             </div>
           </div>
 
-          <div>
+          {/* Prize/Register — mobile: order 3 (between countdown & event details), desktop: col 1–3, row 2 */}
+          <div className="order-3 md:order-none md:col-start-1 md:col-end-4 md:row-start-2">
             <div className="rule-single mb-0" />
             <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-10 py-3 md:py-1.5">
               <p className="section-label md:hidden">Total Prize Pool</p>
@@ -344,6 +371,28 @@ export default function Home() {
                 Register for MCSE &rarr;
               </Link>
             </div>
+          </div>
+
+          {/* Event Details — mobile: order 4 (last, below prize), desktop: col 3, row 1 */}
+          <div className="order-4 md:order-none md:pl-10 md:col-start-3 md:row-start-1 md:border-l md:border-white/12 md:self-start">
+            <p className="section-label mb-2 md:mb-1.5">Event Details</p>
+            <table className="w-full">
+              <tbody>
+                {[
+                  ["Dates",      "24 \u2013 26 April 2026"],
+                  ["Time",       "8:30 PM onwards"],
+                  ["Venue",      "Mahindra University"],
+                  ["Entry Fee",  "\u20b9 100 per team"],
+                  ["Prize Pool", "\u20b9 70,000 total"],
+                  ["Format",     "Live Trading Sim"],
+                ].map(([k, v]) => (
+                  <tr key={k} className="border-b border-white/10">
+                    <td className="py-1.5 md:py-1 pr-4 font-times italic text-white/55 text-[12px] whitespace-nowrap">{k}</td>
+                    <td className="py-1.5 md:py-1 font-times text-white/88 text-[13px]">{v}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
 
         </main>
