@@ -157,6 +157,36 @@ html, body {
   color: #000;
 }
 
+/* Trade buttons */
+.trade-btn-buy {
+  font-family: "Times New Roman", serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #0d0c0b;
+  background: rgba(255, 255, 255, 0.88);
+  padding: 9px 0;
+  transition: background 0.15s, transform 0.1s;
+  cursor: pointer;
+}
+.trade-btn-buy:hover  { background: #fff; }
+.trade-btn-buy:active { background: rgba(255,255,255,0.65); transform: scale(0.97); }
+
+.trade-btn-sell {
+  font-family: "Times New Roman", serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 9px 0;
+  transition: border-color 0.15s, color 0.15s, transform 0.1s;
+  cursor: pointer;
+}
+.trade-btn-sell:hover  { border-color: rgba(255,255,255,0.45); color: rgba(255,255,255,0.8); }
+.trade-btn-sell:active { transform: scale(0.97); }
+
 /* Desktop: compress sizes so page fits without scroll */
 @media (min-width: 768px) {
   .masthead-title     { font-size: clamp(2rem, 7vw, 5.5rem); }
