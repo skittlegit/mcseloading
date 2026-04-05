@@ -117,6 +117,77 @@ function Socials() {
   );
 }
 
+function TradeWidget() {
+  const [idx, setIdx] = useState(0);
+  const [price, setPrice] = useState(() =>
+    parseFloat(TICKER_ITEMS[0].val.replace(/,/g, ""))
+  );
+  const [flash, setFlash] = useState<{ action: "BUY" | "SELL"; price: string } | null>(null);
+  const [trades, setTrades] = useState(0);
+  const flashRef = useRef<number | null>(null);
+
+  const item = TICKER_ITEMS[idx];
+
+  useEffect(() => {
+    const base = parseFloat(TICKER_ITEMS[idx].val.replace(/,/g, ""));
+    const id = setInterval(() => {
+      setPrice((p) => {
+        const delta = (Math.random() - 0.5) * base * 0.0025;
+        return Math.max(base * 0.97, Math.min(base * 1.03, p + delta));
+      });
+    }, 700);
+    return () => clearInterval(id);
+  }, [idx]);
+
+  const fmt = (n: number) =>
+    n.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  const execute = (action: "BUY" | "SELL") => {
+    if (flash) return;
+    setTrades((t) => t + 1);
+    setFlash({ action, price: fmt(price) });
+    if (flashRef.current) clearTimeout(flashRef.current);
+    flashRef.current = window.setTimeout(() => {
+      setFlash(null);
+      setIdx((i) => (i + 1) % TICKER_ITEMS.length);
+    }, 1100);
+  };
+
+  return (
+    <div className="mt-4 md:mt-3 border-t border-white/10 pt-3 w-full max-w-60">
+      {/* Symbol + price row */}
+      <div className="flex items-baseline justify-between mb-2.5">
+        <span className="font-monument text-[9px] tracking-[0.2em] text-white/45">{item.sym}</span>
+        <span className="font-times tabular-nums text-[13px] text-white/85 transition-all duration-300">
+          ₹{fmt(price)}
+        </span>
+        <span className={`font-times text-[10px] ${item.chg.startsWith("+") ? "text-white/45" : "text-white/28"}`}>
+          {item.chg}
+        </span>
+      </div>
+
+      {/* Action area */}
+      {flash ? (
+        <div className={`text-center py-2 font-times text-[11px] tracking-[0.18em] uppercase transition-opacity duration-200 ${flash.action === "BUY" ? "text-white/90" : "text-white/40"}`}>
+          {flash.action} · ₹{flash.price}
+        </div>
+      ) : (
+        <div className="flex gap-1.5">
+          <button onClick={() => execute("BUY")} className="trade-btn-buy flex-1">Buy</button>
+          <button onClick={() => execute("SELL")} className="trade-btn-sell flex-1">Sell</button>
+        </div>
+      )}
+
+      {/* Counter */}
+      {trades > 0 && (
+        <p className="font-times text-[9px] text-white/22 text-center mt-2 tracking-[0.16em] uppercase">
+          {trades} order{trades !== 1 ? "s" : ""} placed
+        </p>
+      )}
+    </div>
+  );
+}
+
 function LoadingScreen({ onDone }: { onDone: () => void }) {
   const [progress, setProgress] = useState(0);
   const [phase, setPhase] = useState(0); // 0=boot 1=chart 2=text 3=exit
@@ -329,16 +400,25 @@ export default function Home() {
 
           {/* About — col 1, row 1 on desktop */}
           <div className="md:pr-8 md:col-start-1 md:row-start-1 md:self-start">
-            <p className="section-label mb-2 md:mb-1.5">About the Exchange</p>
-            <p className="body-text">
-              The Math Club Stock Exchange is a live trading simulation where
-              participants compete across three days of open markets &mdash; buying,
-              selling, and strategising for maximum returns.
+            <p className="section-label mb-3 md:mb-2">The Exchange</p>
+            <p className="body-text mb-4 md:mb-3">
+              University clubs, listed as equities. Buy shares, trade live, collect returns.
             </p>
-            <p className="body-text-dim mt-2 md:mt-1.5">
-              Built for those who believe the market rewards the bold,
-              the disciplined, and the relentless.
-            </p>
+            <div>
+              {([
+                ["01", "Build your portfolio",    "30+ university clubs trade as live stocks"],
+                ["02", "Trade across three days", "Markets open each evening. Prices shift with every session."],
+                ["03", "Claim the prize pool",    "Top portfolios split ₹70,000 at settlement."],
+              ] as [string, string, string][]).map(([num, title, desc]) => (
+                <div key={num} className="flex gap-3 items-start border-t border-white/10 py-2 md:py-1.5">
+                  <span className="font-times italic text-[11px] text-white/25 w-5 shrink-0 mt-0.5 leading-none">{num}</span>
+                  <div>
+                    <p className="font-times text-[12px] text-white/80 leading-snug">{title}</p>
+                    <p className="font-times text-[11px] text-white/38 leading-snug mt-0.5">{desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Countdown — col 2, row 1 on desktop */}
@@ -359,6 +439,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            <TradeWidget />
           </div>
 
           {/* Prize/Register — mobile: order 3 (between countdown & event details), desktop: col 1–3, row 2 */}
