@@ -468,7 +468,7 @@ export default function Home() {
                   ["Dates",      "24 \u2013 26 April 2026"],
                   ["Time",       "8:30 PM onwards"],
                   ["Venue",      "Mahindra University"],
-                  ["Entry Fee",  "\u20b9 100 per team"],
+                  ["Entry Fee",  "\u20b9 100 per person (Free for MU students)"],
                   ["Prize Pool", "\u20b9 70,000 total"],
                   ["Format",     "Live Trading Sim"],
                 ].map(([k, v]) => (
