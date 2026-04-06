@@ -399,7 +399,7 @@ export default function Home() {
         <main className="relative z-10 flex-1 flex flex-col md:grid md:grid-cols-3 md:grid-rows-[1fr_auto] px-6 sm:px-10 md:px-14 pt-5 md:pt-3 pb-5 md:pb-0 gap-5 md:gap-0">
 
           {/* About — col 1, row 1 on desktop */}
-          <div className="md:pr-8 md:col-start-1 md:row-start-1 md:self-start">
+          <div className="order-1 md:pr-8 md:col-start-1 md:row-start-1 md:self-start">
             <p className="section-label mb-3 md:mb-2">The Exchange</p>
             <p className="body-text mb-4 md:mb-3">
               University clubs, listed as equities. Buy shares, trade live, collect returns.
@@ -422,7 +422,7 @@ export default function Home() {
           </div>
 
           {/* Countdown — col 2, row 1 on desktop */}
-          <div className="flex flex-col items-center justify-center gap-3 md:gap-2.5 md:px-8 border-y md:border-y-0 md:border-l md:border-white/12 py-6 md:py-0 md:col-start-2 md:row-start-1">
+          <div className="order-3 flex flex-col items-center justify-center gap-3 md:gap-2.5 md:px-8 border-y md:border-y-0 md:border-l md:border-white/12 py-6 md:py-0 md:col-start-2 md:row-start-1">
             <p className="section-label">Opening Bell In</p>
             <div className="flex gap-6 md:gap-8">
               {[
@@ -442,8 +442,8 @@ export default function Home() {
             <TradeWidget />
           </div>
 
-          {/* Prize/Register — mobile: order 3 (between countdown & event details), desktop: col 1–3, row 2 */}
-          <div className="order-3 md:order-none md:col-start-1 md:col-end-4 md:row-start-2">
+          {/* Prize/Register — mobile: order 2 (above countdown), desktop: col 1–3, row 2 */}
+          <div className="order-2 md:order-none md:col-start-1 md:col-end-4 md:row-start-2">
             <div className="rule-single mb-0" />
             <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-10 py-3 md:py-1.5">
               <p className="section-label md:hidden">Total Prize Pool</p>
@@ -468,7 +468,20 @@ export default function Home() {
                   ["Dates",      "24 \u2013 26 April 2026"],
                   ["Time",       "8:30 PM onwards"],
                   ["Venue",      "Mahindra University"],
-                  ["Entry Fee",  "\u20b9 100 per person (Free for MU students)"],
+                ].map(([k, v]) => (
+                  <tr key={k} className="border-b border-white/10">
+                    <td className="py-1.5 md:py-1 pr-4 font-times italic text-white/55 text-[12px] whitespace-nowrap">{k}</td>
+                    <td className="py-1.5 md:py-1 font-times text-white/88 text-[13px]">{v}</td>
+                  </tr>
+                ))}
+                <tr className="border-b border-white/10">
+                  <td className="py-1.5 md:py-1 pr-4 font-times italic text-white/55 text-[12px] whitespace-nowrap">Entry Fee</td>
+                  <td className="py-1.5 md:py-1 font-times text-white/88 text-[13px]">
+                    <span>&#8377; 100 per person</span><br />
+                    <span className="text-white/45 text-[11px]">Free for MU students</span>
+                  </td>
+                </tr>
+                {[
                   ["Prize Pool", "\u20b9 70,000 total"],
                   ["Format",     "Live Trading Sim"],
                 ].map(([k, v]) => (
