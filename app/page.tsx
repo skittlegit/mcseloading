@@ -354,7 +354,7 @@ export default function Home() {
           <div className="rule-double mb-4 md:mb-3" />
 
           <div className="flex items-center justify-between mb-3 md:mb-2">
-            <Link href="https://www.mathsoc.club/" target="_blank" rel="noopener noreferrer"
+            <Link href="https://www.mathsoc.in/" target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-3 group">
               <Image src="/logo.png" alt="MathSoc" width={32} height={32}
                 className="object-contain opacity-70 group-hover:opacity-100 transition-opacity" />
